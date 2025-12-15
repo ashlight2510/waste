@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>내 인생 낭비력 지수 📉</title>
+
+  <!-- SEO / OG -->
+  <meta name="description" content="웃긴데 찔리는 10문항. 당신의 인생 낭비력은 몇 %?" />
+  <meta property="og:title" content="내 인생 낭비력 지수 📉" />
+  <meta property="og:description" content="10문항으로 낭비력 % + 타입 진단. 결과 캡처/공유각!" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://placehold.co/1200x630/png?text=%EB%82%B4%20%EC%9D%B8%EC%83%9D%20%EB%82%AD%EB%B9%84%EB%A0%A5%20%EC%A7%80%EC%88%98" />
+  <meta property="og:image:alt" content="내 인생 낭비력 지수 테스트" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { font-size: 17px; }
+    @media (min-width: 640px) { :root { font-size: 16px; } }
+    .tap { -webkit-tap-highlight-color: transparent; }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100">
+  <main class="max-w-3xl mx-auto px-4 py-10">
+    <header class="mb-7">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/10 text-sm">
+        📉 밈 테스트
+      </div>
+      <h1 class="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight">
+        내 인생 낭비력 지수
+      </h1>
+      <p class="mt-2 text-slate-300">
+        웃기게 찔리는 10문항. 누르면 바로 다음으로 넘어감.
+      </p>
+    </header>
+
+    <!-- Start -->
+    <section id="start" class="rounded-3xl border border-white/10 bg-white/5 p-5 sm:p-6 shadow-xl">
+      <h2 class="text-xl font-extrabold">준비됨?</h2>
+      <p class="mt-2 text-slate-300">
+        결과는 밈입니다. 너무 진지하게 받지 마세요. (근데 대부분 맞음)
+      </p>
+      <button id="startBtn" class="mt-5 w-full rounded-2xl bg-white text-slate-950 font-bold py-3 hover:opacity-90 transition tap">
+        시작하기
+      </button>
+    </section>
+
+    <!-- Quiz -->
+    <section id="quiz" class="mt-6 hidden">
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-5 sm:p-6 shadow-xl">
+        <div class="flex items-center justify-between">
+          <div class="text-sm text-slate-300">
+            <span id="step"></span>
+          </div>
+          <button id="restartBtn" class="text-sm px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 transition tap">
+            처음부터
+          </button>
+        </div>
+
+        <div class="mt-3 h-2 rounded-full bg-white/10 overflow-hidden">
+          <div id="bar" class="h-full bg-white/70 w-0"></div>
+        </div>
+
+        <h3 id="q" class="mt-6 text-2xl font-extrabold leading-snug"></h3>
+        <p id="sub" class="mt-2 text-sm text-slate-300"></p>
+
+        <div id="choices" class="mt-5 grid gap-3"></div>
+      </div>
+    </section>
+
+    <!-- Result -->
+    <section id="result" class="mt-6 hidden">
+      <div class="rounded-3xl border border-white/10 bg-white/5 p-5 sm:p-6 shadow-xl">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <p class="text-sm text-slate-300">결과</p>
+            <h2 id="typeTitle" class="mt-1 text-2xl font-extrabold"></h2>
+          </div>
+          <div class="text-right">
+            <p class="text-xs text-slate-400">낭비력 지수</p>
+            <p id="pct" class="text-3xl font-extrabold"></p>
+          </div>
+        </div>
+
+        <div class="mt-4 rounded-2xl bg-slate-900/50 border border-white/10 p-4">
+          <p id="typeDesc" class="font-semibold"></p>
+          <p id="meme" class="mt-2 text-sm text-slate-300"></p>
+        </div>
+
+        <div class="mt-5 grid sm:grid-cols-2 gap-3">
+          <button id="shareBtn" class="rounded-2xl bg-emerald-400 text-slate-950 font-bold py-3 hover:opacity-90 transition tap">
+            공유하기(모바일)
+          </button>
+          <button id="copyBtn" class="rounded-2xl bg-white/10 border border-white/10 font-semibold py-3 hover:bg-white/15 transition tap">
+            결과 텍스트 복사
+          </button>
+        </div>
+
+        <div class="mt-6 border-t border-white/10 pt-5">
+          <div class="flex items-center justify-between gap-3">
+            <p class="text-sm text-slate-300">다음 밈으로 또 때리기</p>
+            <button id="toCalcBtn" class="text-sm px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 transition tap">
+              안 산 총자산 계산기 →
+            </button>
+          </div>
+          <p class="mt-2 text-xs text-slate-400">
+            (내부링크 버튼. 실제 배포 후 URL 맞춰 바꾸면 됨)
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="mt-8 text-center text-xs text-slate-500">
+      made for funnyfunny / ashlight vibe ✨
+    </footer>
+  </main>
+
+  <script>
+    const QUESTIONS = [
+      {
+        q: "하루에 SNS/유튜브를 얼마나 보나요?",
+        sub: "‘잠깐만’이 2시간 되는 그거",
+        a: [
+          ["거의 안 봄", 0],
+          ["30분~1시간", 1],
+          ["1~3시간", 2],
+          ["3시간 이상", 3],
+        ],
+      },
+      {
+        q: "알람을 몇 번 미루나요?",
+        sub: "스누즈는 의지력 테스트다",
+        a: [
+          ["0~1번", 0],
+          ["2~3번", 1],
+          ["4~6번", 2],
+          ["7번 이상(혹은 포기)", 3],
+        ],
+      },
+      {
+        q: "‘할 일’ 대신 ‘계획’만 세운 적?",
+        sub: "계획 세우는 순간 이미 한 느낌",
+        a: [
+          ["거의 없음", 0],
+          ["가끔", 1],
+          ["자주", 2],
+          ["계획이 본업", 3],
+        ],
+      },
+      {
+        q: "배달앱 켰다가 안 시킨 적?",
+        sub: "구경만 하고 닫으면 칼로리는 0",
+        a: [
+          ["거의 없음", 0],
+          ["가끔", 1],
+          ["자주", 2],
+          ["매일(장바구니 친구)", 3],
+        ],
+      },
+      {
+        q: "결정 피로가 자주 오나요?",
+        sub: "‘뭐 먹지’로 하루 다 쓰는 타입",
+        a: [
+          ["거의 없음", 0],
+          ["가끔", 1],
+          ["자주", 2],
+          ["항상", 3],
+        ],
+      },
+      {
+        q: "일하다가 딴짓으로 새는 시간은?",
+        sub: "탭이 늘어날수록 집중은 줄어든다",
+        a: [
+          ["거의 없음", 0],
+          ["하루 10~20분", 1],
+          ["하루 30~60분", 2],
+          ["하루 1시간 이상", 3],
+        ],
+      },
+      {
+        q: "충동구매 후 ‘필요해서 샀다’ 라고 말한 적?",
+        sub: "합리화는 인간의 기본 스킬",
+        a: [
+          ["거의 없음", 0],
+          ["가끔", 1],
+          ["자주", 2],
+          ["기본 멘트", 3],
+        ],
+      },
+      {
+        q: "운동/공부를 ‘내일부터’로 미루는 빈도?",
+        sub: "내일의 나는… 오늘의 나와 동일 인물",
+        a: [
+          ["거의 없음", 0],
+          ["가끔", 1],
+          ["자주", 2],
+          ["항상(전설)", 3],
+        ],
+      },
+      {
+        q: "피곤하면 하는 행동은?",
+        sub: "회복의 방향이 중요",
+        a: [
+          ["바로 쉼/수면", 0],
+          ["가벼운 산책/정리", 1],
+          ["눕고 폰(무한스크롤)", 2],
+          ["폰+야식 콤보", 3],
+        ],
+      },
+      {
+        q: "‘바쁜데 기억나는 게 없음’이 자주 있나요?",
+        sub: "움직였는데 남는 게 없을 때",
+        a: [
+          ["거의 없음", 0],
+          ["가끔", 1],
+          ["자주", 2],
+          ["거의 매일", 3],
+        ],
+      },
+    ];
+
+    const TYPES = [
+      {
+        min: 0, max: 8,
+        title: "🧠 선택적 낭비형",
+        desc: "쓸 때는 쓰지만, 선은 지키는 타입.",
+        meme: "낭비도 전략적으로 하는 사람. 부럽다."
+      },
+      {
+        min: 9, max: 16,
+        title: "😇 착각형 낭비러",
+        desc: "열심히 사는 것 같은데… 왜 남는 게 없지?",
+        meme: "노력은 했는데 성과는 없음. (대부분 이 구간)"
+      },
+      {
+        min: 17, max: 24,
+        title: "🔥 낭비 마스터형",
+        desc: "시간·돈·에너지를 고루 태우는 올라운더.",
+        meme: "행복은 샀고, 저축은 안 샀다."
+      },
+      {
+        min: 25, max: 30,
+        title: "🥲 인생 효율 0형",
+        desc: "바쁜데 한 게 없음. 근데 진짜 바쁨.",
+        meme: "오늘도 최선을 다해… 쉼을 실천했다."
+      },
+    ];
+
+    const $start = document.getElementById("start");
+    const $quiz = document.getElementById("quiz");
+    const $result = document.getElementById("result");
+    const $q = document.getElementById("q");
+    const $sub = document.getElementById("sub");
+    const $choices = document.getElementById("choices");
+    const $bar = document.getElementById("bar");
+    const $step = document.getElementById("step");
+
+    let idx = 0;
+    let score = 0;
+
+    function setView(v) {
+      $start.classList.toggle("hidden", v !== "start");
+      $quiz.classList.toggle("hidden", v !== "quiz");
+      $result.classList.toggle("hidden", v !== "result");
+    }
+
+    function render() {
+      const total = QUESTIONS.length;
+      const cur = QUESTIONS[idx];
+      $step.textContent = `문항 ${idx + 1} / ${total}`;
+      $bar.style.width = `${Math.round((idx / total) * 100)}%`;
+
+      $q.textContent = cur.q;
+      $sub.textContent = cur.sub || "";
+
+      $choices.innerHTML = "";
+      cur.a.forEach(([label, val]) => {
+        const btn = document.createElement("button");
+        btn.className = "tap text-left rounded-2xl border border-white/10 bg-slate-900/40 hover:bg-slate-900/55 transition p-4";
+        btn.innerHTML = `
+          <div class="font-bold">${label}</div>
+          <div class="text-xs text-slate-400 mt-1">눌러서 다음으로</div>
+        `;
+        btn.addEventListener("click", () => {
+          score += val;
+          idx += 1;
+          if (idx >= total) showResult();
+          else render();
+        });
+        $choices.appendChild(btn);
+      });
+    }
+
+    function pickType(s) {
+      return TYPES.find(t => s >= t.min && s <= t.max) || TYPES[TYPES.length - 1];
+    }
+
+    function toPercent(s) {
+      const max = QUESTIONS.length * 3;
+      return Math.round((s / max) * 100);
+    }
+
+    function showResult() {
+      const t = pickType(score);
+      const pct = toPercent(score);
+
+      document.getElementById("typeTitle").textContent = t.title;
+      document.getElementById("typeDesc").textContent = t.desc;
+      document.getElementById("meme").textContent = t.meme;
+      document.getElementById("pct").textContent = `${pct}%`;
+
+      $bar.style.width = "100%";
+      setView("result");
+      setTimeout(() => $result.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+    }
+
+    function resetAll() {
+      idx = 0;
+      score = 0;
+      setView("start");
+    }
+
+    function buildShareText() {
+      const t = pickType(score);
+      const pct = toPercent(score);
+      return [
+        "📉 내 인생 낭비력 지수 테스트",
+        "",
+        `낭비력 지수: ${pct}%`,
+        `타입: ${t.title}`,
+        `한 줄: ${t.meme}`,
+      ].join("\n");
+    }
+
+    document.getElementById("startBtn").addEventListener("click", () => {
+      idx = 0; score = 0;
+      setView("quiz");
+      render();
+      setTimeout(() => $quiz.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+    });
+
+    document.getElementById("restartBtn").addEventListener("click", resetAll);
+
+    document.getElementById("copyBtn").addEventListener("click", async () => {
+      const text = buildShareText();
+      try {
+        await navigator.clipboard.writeText(text);
+        alert("복사됨! (붙여넣기 하면 바로 공유 가능)");
+      } catch {
+        prompt("복사해서 공유해줘:", text);
+      }
+    });
+
+    document.getElementById("shareBtn").addEventListener("click", async () => {
+      const text = buildShareText();
+      const url = location.href;
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: "내 인생 낭비력 지수", text, url });
+          return;
+        } catch {}
+      }
+      try {
+        await navigator.clipboard.writeText(text + "\n\n" + url);
+        alert("공유용 텍스트+링크 복사됨!");
+      } catch {
+        prompt("복사해서 공유해줘:", text + "\n\n" + url);
+      }
+    });
+
+    document.getElementById("toCalcBtn").addEventListener("click", () => {
+      // 같은 폴더에 nospend.html 올렸다면:
+      const next = new URL(location.href);
+      next.pathname = next.pathname.replace(/[^/]*$/, "nospend.html");
+      location.href = next.toString();
+    });
+
+    // default view
+    setView("start");
+  </script>
+</body>
+</html>
